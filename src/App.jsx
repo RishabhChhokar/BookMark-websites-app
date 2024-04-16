@@ -18,8 +18,8 @@ function App() {
   };
   return (
     <ContextProvider>
-      <div style={{ textAlign: "center"}}>
-        <h1>Bookmark Website</h1>
+      <>
+        <h1 style={{ textAlign : "center"}}>Bookmark Website</h1>
         <Modal
           changeEdit={changeEdit}
           isEditButton={isEdit}
@@ -27,7 +27,7 @@ function App() {
           url={bookmarkUrl}
           id={bookmarkId}
         />
-      </div>
+      </>
       <BookmarkList onEdit={handleEdit} />
     </ContextProvider>
   );

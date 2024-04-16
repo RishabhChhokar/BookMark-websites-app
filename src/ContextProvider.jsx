@@ -12,7 +12,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     axios
       .get(
-        "https://crudcrud.com/api/5b31209b9ebb4bf6a3915aa5d17eae95/bookmarks"
+        "https://crudcrud.com/api/8c14a411afe7487e9d0c545f6cf6e900/bookmarks"
       )
       .then((response) => setBookmarks(response.data))
       .catch((error) => console.error("Error fetching bookmarks:", error));
@@ -21,7 +21,7 @@ const ContextProvider = ({ children }) => {
   const addBookmark = async (newBookmark) => {
     try {
       const response = await axios.post(
-        "https://crudcrud.com/api/5b31209b9ebb4bf6a3915aa5d17eae95/bookmarks",
+        "https://crudcrud.com/api/8c14a411afe7487e9d0c545f6cf6e900/bookmarks",
         newBookmark
       );
       setBookmarks([...bookmarks, response.data]);
@@ -33,7 +33,7 @@ const ContextProvider = ({ children }) => {
   const updateBookmark = async (id, updatedBookmark) => {
     try {
       await axios.put(
-        `https://crudcrud.com/api/5b31209b9ebb4bf6a3915aa5d17eae95/bookmarks/${id}`,
+        `https://crudcrud.com/api/8c14a411afe7487e9d0c545f6cf6e900/bookmarks/${id}`,
         updatedBookmark
       );
       const updatedBookmarks = bookmarks.map((bookmark) =>
@@ -48,7 +48,7 @@ const ContextProvider = ({ children }) => {
   const deleteBookmark = async (id) => {
     try {
       await axios.delete(
-        `https://crudcrud.com/api/5b31209b9ebb4bf6a3915aa5d17eae95/bookmarks/${id}`
+        `https://crudcrud.com/api/8c14a411afe7487e9d0c545f6cf6e900/bookmarks/${id}`
       );
       const updatedBookmarks = bookmarks.filter(
         (bookmark) => bookmark._id !== id
