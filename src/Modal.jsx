@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { useBookmarks } from "./ContextProvider";
+import classes from "./Modal.module.css";
+
 
 const Modal = (props) => {
   const { addBookmark, updateBookmark } = useBookmarks();
@@ -18,13 +20,16 @@ const Modal = (props) => {
     if (!name.trim() || !url.trim()) return;
     updateBookmark(props.id, { name, url });
     closeModal();
-    props.changeEdit()
+    props.changeEdit();
   };
 
   const closeModal = () => {
     setIsOpen(false);
     setName("");
     setUrl("");
+    if (props.isEditButton) {
+      props.changeEdit();
+    }
   };
 
   React.useEffect(() => {
@@ -36,21 +41,19 @@ const Modal = (props) => {
   }, [props.isEditButton, props.name, props.url]);
 
   return (
-    <>
+    <div className={classes.modal}>
       <button onClick={() => setIsOpen(true)}>
         {props.isEditButton ? "Edit Bookmark" : "Add New Bookmark"}
       </button>
       {isOpen && (
-        <>
-          <span onClick={closeModal} className="close-btn">
-            &times;
-          </span>
+        <div>
           <h2>{props.isEditButton ? "Edit Bookmark" : "Add New Bookmark"}</h2>
           <input
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className={classes.input}
           />
           <input
             type="text"
@@ -58,16 +61,19 @@ const Modal = (props) => {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-          <button
-            onClick={
-              props.isEditButton ? handleEditBookmark : handleAddBookmark
-            }
-          >
-            {props.isEditButton ? "Update" : "Add"}
-          </button>
-        </>
+          <div className={classes.actions}>
+            <button
+              onClick={
+                props.isEditButton ? handleEditBookmark : handleAddBookmark
+              }
+            >
+              {props.isEditButton ? "Update" : "Add"}
+            </button>
+            <button onClick={closeModal}>Cancel</button>
+          </div>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -14,8 +14,6 @@ const BookmarkList = (props) => {
             <span>
               <a
                 href={`http://${bookmark.url}`}
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 {bookmark.url}
               </a>
